@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignUp } from './interfaces/auth.interface'
+import { SignUp, Login } from './interfaces/auth.interface'
 
 @Injectable()
 export class AuthService {
@@ -8,10 +8,16 @@ export class AuthService {
 
   register(data: SignUp) {
     this.auth.push(data)
+    console.log(this.auth)
   }
 
-  help(): string {
-    return 'Help you!!!'
+  login(data: Login) {
+    const user = this.auth.find(register => register.email === data.email && register.password === data.password)
+    if(user){
+      return "Ok"
+    }
+
+    return "Usuário não encontrado!"
   }
 
   status(): string {
