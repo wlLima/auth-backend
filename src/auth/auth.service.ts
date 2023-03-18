@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { SignUp } from './interfaces/auth.interface'
 
 @Injectable()
 export class AuthService {
-  register(): string {
-    return 'Registro em desenvolvimento!';
+  private readonly auth: SignUp[] = []
+
+
+  register(data: SignUp) {
+    this.auth.push(data)
   }
 
   help(): string {
