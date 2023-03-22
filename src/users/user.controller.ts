@@ -6,8 +6,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('list')
-  async list() {
-    return this.userService.list();
+  async findAll() {
+    return this.userService.findAll();
   }
 
 }

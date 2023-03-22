@@ -11,8 +11,9 @@ export class UserService {
   ){}
 
 
-  list() {
+  findAll(): Promise<User[]> {
     console.log('lista de usuários!')
+    return this.usersRepository.find();
   }
 
 }
