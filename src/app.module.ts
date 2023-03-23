@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
 
 import { User } from './users/user.entity'
+import { Type } from './type/type.entity'
 
 @Module({
   imports: [
@@ -22,9 +23,9 @@ import { User } from './users/user.entity'
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DB_NAME,
-      entities: [User],
+      entities: [User, Type],
       migrations: [],
-      //synchronize: true,
+     // synchronize: true, //aplica qualquer alteração dos entities ao banco de dados
     })],
   controllers: [AppController],
   providers: [AppService],
