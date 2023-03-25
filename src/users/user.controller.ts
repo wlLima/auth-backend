@@ -10,4 +10,9 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Post('register')
+  async Register(@Body() data) {
+    return this.userService.create(data);
+  }
+
 }
