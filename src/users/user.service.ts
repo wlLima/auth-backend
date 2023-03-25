@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import {UserDto} from './dto/user.dto'
 import { User } from './user.entity'
 
 @Injectable()
@@ -10,9 +11,11 @@ export class UserService {
     private usersRepository: Repository<User>
   ){}
 
+  create(data: UserDto) {
+    return this.usersRepository.save(data)
+  }
 
   findAll(): Promise<User[]> {
-    console.log('lista de usuários!')
     return this.usersRepository.find();
   }
 
