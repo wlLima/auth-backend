@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { SignUp, Login } from './interfaces/auth.interface'
+import { InjectRepository } from '@nestjs/typeorm';
+import {User} from '../users/user.entity'
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
-  private readonly auth: SignUp[] = []
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>
+  ){}
 
 
   register(data: SignUp) {
-    this.auth.push(data)
-    console.log(this.auth)
+    return this.usersRepository.save(data)
   }
 
   login(data: Login) {
-    const user = this.auth.find(register => register.email === data.email && register.password === data.password)
-    if(user){
-      return "Ok"
-    }
+    const user = this.usersRepository.findOneBy({email: data.email})
+    // if(user){
+    //   return "Ok"
+    // }
 
-    return "Usuário não encontrado!"
-  }
-
-  status(): string {
-    return 'ok'
+    return user
   }
 }
