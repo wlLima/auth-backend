@@ -11,12 +11,17 @@ export class UserService {
     private usersRepository: Repository<User>
   ){}
 
-  create(data: UserDto) {
+  async create(data: UserDto) {
     return this.usersRepository.save(data)
   }
 
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.usersRepository.find();
+  }
+
+  async findOne(data){
+    const user = await this.usersRepository.findOneBy({email: data.email})
+    return user
   }
 
 }

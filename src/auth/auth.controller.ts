@@ -11,9 +11,9 @@ export class AuthController {
     return this.authService.register(data);
   }
 
-  @Post('login')
-  async Login(@Body() data: LoginDto) {
-    return this.authService.login(data)
-  }
+  // @Post('login')
+  // async Login(@Body() data: LoginDto) {
+  //   return this.authService.login(data)
+  // }
 
 }
