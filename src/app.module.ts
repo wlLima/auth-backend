@@ -13,7 +13,10 @@ import { Type } from './type/type.entity'
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot({
+      isGlobal: true, //faz com que o .env seja importando globalmente para que não seja necessário importar em outros modulos
+      envFilePath: '.env'
+    }), 
     AuthModule,
     UserModule,
     TypeOrmModule.forRoot({

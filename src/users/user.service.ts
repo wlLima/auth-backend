@@ -20,7 +20,7 @@ export class UserService {
   }
 
   async findOne(data){
-    const user = await this.usersRepository.findOneBy({email: data.email})
+    const user = await this.usersRepository.findOneBy({email: data})
     return user
   }
 
