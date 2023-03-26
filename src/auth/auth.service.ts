@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { SignUp, Login } from './interfaces/auth.interface'
+import { UserService } from 'src/users/user.service';
 
 @Injectable()
 export class AuthService {
-  private readonly auth: SignUp[] = []
+  constructor(private userService: UserService){}
 
 
-  register(data: SignUp) {
-    this.auth.push(data)
-    console.log(this.auth)
+  register(data) {
+    this.userService.create(data)
   }
 
-  login(data: Login) {
-    const user = this.auth.find(register => register.email === data.email && register.password === data.password)
-    if(user){
-      return "Ok"
+  async validateUser(data: Login) {
+    const user = await this.userService.findOne(data.email)
+
+    if(user && user.password === data.password){
+      const { password, ...result} = user;
+      return result
     }
 
-    return "Usuário não encontrado!"
-  }
-
-  status(): string {
-    return 'ok'
+    return null
   }
 }
