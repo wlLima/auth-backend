@@ -14,8 +14,9 @@ export class AuthService {
     this.userService.create(data)
   }
 
-  profile(data){
-    return this.userService.findOne(data)
+  async profile(data){
+    const teste = await this.userService.findOne(data)
+    return teste
   }
 
   async validateUser(username: string, pass: string): Promise<any> {
